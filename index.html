@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><path d='M6 4h18a2 2 0 0 1 2 2v20a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z' fill='%234A0E4E'/><path d='M16 4v24' stroke='%23220525' stroke-width='1.5'/><path d='M15 6h2v17h-2z' fill='%23FFD700'/><path d='M13 9h6v2h-6z' fill='%23FFD700'/><path d='M10 13h12v2h-12z' fill='%23FFD700'/><path d='M13 18L19 20v2L13 20z' fill='%23FFD700'/></svg>">
+    <link rel="stylesheet" href="index.css">
+
+    <title>Koine Greek Resources</title>
+</head>
+<body>
+    <header role="banner" class="header-main">
+        <div class="logo">
+            <a href="#">Koine Greek Resources</a>
+        </div>
+        
+        <!-- Semantic navigation container -->
+        <nav aria-label="Main Navigation"> 
+            <ul class="nav-links">
+            <li><a href="?" class="active">Home</a></li>
+            <li class="dropdown">
+                <a href="#">Mochi Cards</a>
+                <ul id="mochi-dropdown" class="dropdown-menu"></ul>
+            </li>
+            <li class="dropdown">
+                <a href="#">Anki Cards</a>
+                <ul id="anki-dropdown" class="dropdown-menu"></ul>
+            </li>
+            <!-- Dropdown Example -->
+            <li class="dropdown">
+                <a href="#">Readers</a>
+                <ul id="reader-dropdown" class="dropdown-menu"></ul>
+            </li>
+            <li><a href="https://github.com/jreamy/prologue-of-john/issues">Issues</a></li>
+            </ul>
+        </nav>
+        
+        <!-- Hamburger Menu Icon (Hidden on desktop via CSS) -->
+        <button class="hamburger-btn" aria-label="Open Menu">☰</button>
+    </header>
+    <main>
+
+        <div id="reader-viewer" class="main-content">
+            <div class="column">
+                <h1>Χαίρετε!</h1>
+
+                <p>
+                    This page is a collection of resources I have put together for practicing Koine Greek. 
+                    Currently it's primarily geared toward using Croy (A Primer of Biblical Greek), but
+                    as time goes on I may add other resources.
+                </p>
+
+                <h2>Flashcards</h2>
+
+                <p>
+                    In my opinion, making your own flashcards is better than using someone else's, 
+                    but I thought these might help get y'all started. You'll notice a few types of cards:
+                    <ul>
+                        <li>vocab word to definition</li>
+                        <li>sentence fragment (very important!)</li>
+                        <li>verb or noun paradigm</li>
+                        <li>a grammatical rule or pattern</li>
+                    </ul>
+                </p>
+
+                <p>
+                    Set a modest goal of how much you will practice and then stick with it! 
+                    I generally aim for 5 - 10 new cards each day, then practice every day for 10 - 15 minutes.
+                </p>
+
+                <h2>Reading With Others</h2>
+
+                <p>
+                    One of the best ways I've found to study Greek is reading aloud with others –
+                    I encourage you to find friends to read with. The example sentences from Croy are a decent 
+                    starting point and jumping into the New Testament will benefit you in untold ways. 
+                    Don't worry if you don't understand a single word of the Gospel at first; 
+                    read it in Greek, read it in English, then read it in Greek again and you'll start to subconsciously 
+                    pick up parts of the language. 
+                    If the Croy sentences are too easy, but jumping into the New Testament is too daunting, 
+                    check out some of the readers I've put together.
+                </p>
+            </div>
+
+        </div>
+
+        <script>
+
+        document.getElementById('reader-dropdown').innerHTML = [2, 3, 4, 5, 6, 7].map(idx => `
+            <li><a href="?id=croy/reader/lesson_${idx}.pdf">Croy Lesson ${idx}</a></li>
+        `).join("\n")
+
+        document.getElementById('anki-dropdown').innerHTML = [2, 3, 4, 5, 6].map(idx => `
+            <li><a href="croy/flashcards/Croy Lesson ${idx}.apkg" download>Croy Lesson ${idx}.apkg</a></li>
+        `).join("\n")
+
+        document.getElementById('mochi-dropdown').innerHTML = [2, 3, 4, 5, 6].map(idx => `
+            <li><a href="croy/flashcards/Croy Lesson ${idx}.mochi" download>Croy Lesson ${idx}.mochi</a></li>
+        `).join("\n")
+
+        const searches = window.location.search.split("?")?.[1].split("&").map(s => s.split("="))
+
+        const file = searches.find(x => x[0] === "id")[1] ?? ''
+        document.getElementById('reader-viewer').innerHTML = file ? `
+            <embed src="${file}" type="application/pdf" width="100%" height="650px" />
+        ` : `
+            
+        `
+
+        </script>
+
+    </main>
+</body>
