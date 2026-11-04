@@ -173,9 +173,50 @@ embed {
 }
 
 @media (max-width: 768px) {
-  .nav-links {
-    display: none; /* Can be paired with simple mobile toggles if needed */
+  .header-main {
+    flex-wrap: wrap;
   }
+
+  .nav-links {
+    display: none; /* Hidden by default on mobile */
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+    margin-top: 1rem;
+  }
+
+  /* When the header has the 'nav-open' class, show the menu */
+  .header-main.nav-open .nav-links {
+    display: flex;
+  }
+
+  .nav-links li {
+    width: 100%;
+  }
+
+  .nav-links a {
+    display: block;
+    width: 100%;
+    padding: 0.75rem 0.5rem;
+  }
+
+  /* Mobile Dropdown adjustments (since hover doesn't work well on touch) */
+  .dropdown-menu {
+    position: static;
+    box-shadow: none;
+    border: none;
+    background-color: transparent;
+    padding-left: 1rem;
+    display: none; /* Hidden until clicked */
+  }
+
+  .dropdown.open .dropdown-menu {
+    display: block;
+  }
+
   .hamburger-btn {
     display: block;
   }

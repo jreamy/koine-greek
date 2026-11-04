@@ -118,14 +118,35 @@
             <li><a href="croy/flashcards/Croy Lesson ${idx}.mochi" download>Croy Lesson ${idx}.mochi</a></li>
         `).join("\n")
 
-        const searches = window.location.search.split("?")?.[1].split("&").map(s => s.split("="))
+        const searches = window.location.search?.split("?")?.[1]?.split("&")?.map(s => s.split("=")) ?? []
 
-        const file = searches.find(x => x[0] === "id")[1] ?? ''
-        document.getElementById('reader-viewer').innerHTML = file ? `
-            <embed src="${file}" type="application/pdf" width="100%" height="650px" />
-        ` : `
-            
-        `
+        const file = searches.find(x => x[0] === "id")
+        if (file) {
+            document.getElementById('reader-viewer').innerHTML = `
+                <embed src="${file[1]}" type="application/pdf" width="100%" height="650px" />
+            `
+        }
+
+
+        // Toggle mobile menu open/closed
+        const hamburgerBtn = document.querySelector('.hamburger-btn');
+        const headerMain = document.querySelector('.header-main');
+
+        hamburgerBtn.addEventListener('click', () => {
+            headerMain.classList.toggle('nav-open');
+        });
+
+        // Toggle dropdowns on mobile tap
+        document.querySelectorAll('.dropdown > a').forEach(dropdownToggle => {
+            dropdownToggle.addEventListener('click', (e) => {
+                const isMobileView = window.getComputedStyle(hamburgerBtn).display !== 'none';
+                if (isMobileView) {
+                    e.preventDefault(); // Stop it from following the "#" link
+                    const parentLi = dropdownToggle.parentElement;
+                    parentLi.classList.toggle('open');
+                }
+            });
+        });
 
         </script>
 
