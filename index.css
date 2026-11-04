@@ -154,6 +154,21 @@ h2 {
   font-size: 1.6rem;
 }
 
+main p a, .column p a,
+main li a, .column li a {
+  color: var(--accent-color);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease, text-decoration-thickness 0.2s ease;
+}
+
+main p a:hover, .column p a:hover,
+main li a:hover, .column li a:hover {
+  color: var(--accent-hover);
+  text-decoration-thickness: 2px;
+}
+
 p, ul, ol {
   margin-bottom: 1.2rem;
 }
