@@ -193,6 +193,13 @@ embed {
     display: flex;
   }
 
+  /* When the menu is open, force the logo to take up the full top line */
+  .header-main.nav-open .logo {
+    width: 100%;
+    text-align: center; /* Centers the logo on its own line */
+    margin-bottom: 0.5rem;
+  }
+
   .nav-links li {
     width: 100%;
   }
